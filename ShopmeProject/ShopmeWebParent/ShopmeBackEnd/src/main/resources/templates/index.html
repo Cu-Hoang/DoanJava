@@ -7,10 +7,13 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: menu"></div>
 		<div>
-			<h1>Cybershark Control Panel</h1>
+			<h2>Cybershark Control Panel</h2>
+			Welcom <a th:href="@{/account}"
+				sec:authentication="principal.fullname"></a>
+			<span sec:authentication="principal.authorities"></span>
 		</div>
 		<div th:replace="fragments :: footer"></div>
 
-	</div> 
+	</div>
 </body>
 </html>

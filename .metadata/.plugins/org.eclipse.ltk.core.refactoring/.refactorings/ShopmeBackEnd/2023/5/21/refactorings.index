@@ -1,3 +1,21 @@
 1684750962146	Copy file
 1684831558756	Move compilation unit
 1684832308341	Copy file
+1685150074675	Move compilation unit
+1685150080393	Move compilation unit
+1685150084553	Move compilation unit
+1685150240943	Move 'account_form.html' to 'categories'
+1685150244527	Move 'account_form.html' to 'User'
+1685150249094	Move 'user_form.html' to 'User'
+1685150252018	Move 'users.html' to 'User'
+1685150363681	Rename resource 'User'
+1685150697548	Copy file
+1685153679346	Move 'error.html' to 'templates'
+1685154025551	Copy file
+1685154040107	Rename resource 'error.html'
+1685154170984	Copy file
+1685154295806	Copy file
+1685154634465	Rename resource '400.html'
+1685176840304	Copy file
+1685176861604	Rename resource 'user_form.html'
+1685178329889	Delete element

@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import java.util.HashSet;
 @Entity
@@ -17,13 +18,11 @@ import java.util.HashSet;
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="Ma_loai_san_pham")
 	private Integer id;
 	
-	@Column(length=128, nullable=false, unique=true)
+	@Column(name="Ten_loai_san_pham",length=128, nullable=false, unique=true)
 	private String name;
-	
-	@Column(length=64, nullable=false, unique=true)
-	private String alias;
 	
 	@Column(length=128, nullable=false)
 	private String image;
@@ -45,7 +44,6 @@ public class Category {
 
 	public Category(String name) {
 		this.name = name;
-		this.alias=name;
 		this.image="default.png";
 	}
 
@@ -58,6 +56,35 @@ public class Category {
 		return id;
 	}
 
+	public static Category copyIdAndName(Category category) {
+		Category copyCategory = new Category();
+		copyCategory.setId(category.getId());
+		copyCategory.setName(category.getName());
+		
+		return copyCategory;
+	}
+
+	public static Category copyIdAndName(Integer id, String name) {
+		Category copyCategory = new Category();
+		copyCategory.setId(id);
+		copyCategory.setName(name);
+		
+		return copyCategory;
+	}
+	public static Category copyFull(Category category) {
+		Category copyCategory = new Category();
+		copyCategory.setId(category.getId());
+		copyCategory.setName(category.getName());
+		copyCategory.setImage(category.getImage());
+		copyCategory.setEnabled(category.isEnabled());
+		copyCategory.setHasChildren(category.getChildren().size() > 0);
+		return copyCategory;		
+	}
+	public static Category copyFull(Category category, String name) {
+		Category copyCategory = Category.copyFull(category);
+		copyCategory.setName(name);
+		return copyCategory;
+	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -70,13 +97,7 @@ public class Category {
 		this.name = name;
 	}
 
-	public String getAlias() {
-		return alias;
-	}
 
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
 
 	public String getImage() {
 		return image;
@@ -109,7 +130,21 @@ public class Category {
 	public void setChildren(Set<Category> children) {
 		this.children = children;
 	}
+	@Transient
+	public String getImagePath() {
+		if(this.id == null) return "/images/image thumbnail.png";
+		return "/category-images/" + this.id +"/" + this.image;
+	}
 	
-	
+	public boolean isHasChildren() {
+		return hasChildren;
+	}
+
+	public void setHasChildren(boolean hasChildren) {
+		this.hasChildren = hasChildren;
+	}
+
+	@Transient
+	private boolean hasChildren;
 
 }
